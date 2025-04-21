@@ -82,6 +82,8 @@ const ApiOptions = ({
 }: ApiOptionsProps) => {
 	const { t } = useAppTranslation()
 
+	const [showApiKey, setShowApiKey] = useState(false)
+
 	const [ollamaModels, setOllamaModels] = useState<string[]>([])
 	const [lmStudioModels, setLmStudioModels] = useState<string[]>([])
 	const [vsCodeLmModels, setVsCodeLmModels] = useState<LanguageModelChatSelector[]>([])
@@ -332,22 +334,31 @@ const ApiOptions = ({
 
 			{selectedProvider === "openrouter" && (
 				<>
-					<VSCodeTextField
-						value={apiConfiguration?.openRouterApiKey || ""}
-						type="password"
-						onInput={handleInputChange("openRouterApiKey")}
-						placeholder={t("settings:placeholders.apiKey")}
-						className="w-full">
-						<div className="flex justify-between items-center mb-1">
-							<label className="block font-medium">{t("settings:providers.openRouterApiKey")}</label>
-							{apiConfiguration?.openRouterApiKey && (
-								<OpenRouterBalanceDisplay
-									apiKey={apiConfiguration.openRouterApiKey}
-									baseUrl={apiConfiguration.openRouterBaseUrl}
-								/>
-							)}
-						</div>
-					</VSCodeTextField>
+					<div className="flex items-center gap-1">
+						<VSCodeTextField
+							value={apiConfiguration?.openRouterApiKey || ""}
+							type={showApiKey ? "text" : "password"}
+							onInput={handleInputChange("openRouterApiKey")}
+							placeholder={t("settings:placeholders.apiKey")}
+							className="w-full grow">
+							<div className="flex justify-between items-center mb-1">
+								<label className="block font-medium">{t("settings:providers.openRouterApiKey")}</label>
+								{apiConfiguration?.openRouterApiKey && (
+									<OpenRouterBalanceDisplay
+										apiKey={apiConfiguration.openRouterApiKey}
+										baseUrl={apiConfiguration.openRouterBaseUrl}
+									/>
+								)}
+							</div>
+						</VSCodeTextField>
+						<Button
+							variant="ghost"
+							size="icon"
+							onClick={() => setShowApiKey(!showApiKey)}
+							title={showApiKey ? t("settings:common.hideApiKey") : t("settings:common.showApiKey")}>
+							<span className={showApiKey ? "codicon codicon-eye-closed" : "codicon codicon-eye"} />
+						</Button>
+					</div>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
 						{t("settings:providers.apiKeyStorageNotice")}
 					</div>
@@ -401,14 +412,23 @@ const ApiOptions = ({
 
 			{selectedProvider === "anthropic" && (
 				<>
-					<VSCodeTextField
-						value={apiConfiguration?.apiKey || ""}
-						type="password"
-						onInput={handleInputChange("apiKey")}
-						placeholder={t("settings:placeholders.apiKey")}
-						className="w-full">
-						<label className="block font-medium mb-1">{t("settings:providers.anthropicApiKey")}</label>
-					</VSCodeTextField>
+					<div className="flex items-center gap-1">
+						<VSCodeTextField
+							value={apiConfiguration?.apiKey || ""}
+							type={showApiKey ? "text" : "password"}
+							onInput={handleInputChange("apiKey")}
+							placeholder={t("settings:placeholders.apiKey")}
+							className="w-full grow">
+							<label className="block font-medium mb-1">{t("settings:providers.anthropicApiKey")}</label>
+						</VSCodeTextField>
+						<Button
+							variant="ghost"
+							size="icon"
+							onClick={() => setShowApiKey(!showApiKey)}
+							title={showApiKey ? t("settings:common.hideApiKey") : t("settings:common.showApiKey")}>
+							<span className={showApiKey ? "codicon codicon-eye-closed" : "codicon codicon-eye"} />
+						</Button>
+					</div>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
 						{t("settings:providers.apiKeyStorageNotice")}
 					</div>
@@ -455,14 +475,23 @@ const ApiOptions = ({
 
 			{selectedProvider === "glama" && (
 				<>
-					<VSCodeTextField
-						value={apiConfiguration?.glamaApiKey || ""}
-						type="password"
-						onInput={handleInputChange("glamaApiKey")}
-						placeholder={t("settings:placeholders.apiKey")}
-						className="w-full">
-						<label className="block font-medium mb-1">{t("settings:providers.glamaApiKey")}</label>
-					</VSCodeTextField>
+					<div className="flex items-center gap-1">
+						<VSCodeTextField
+							value={apiConfiguration?.glamaApiKey || ""}
+							type={showApiKey ? "text" : "password"}
+							onInput={handleInputChange("glamaApiKey")}
+							placeholder={t("settings:placeholders.apiKey")}
+							className="w-full grow">
+							<label className="block font-medium mb-1">{t("settings:providers.glamaApiKey")}</label>
+						</VSCodeTextField>
+						<Button
+							variant="ghost"
+							size="icon"
+							onClick={() => setShowApiKey(!showApiKey)}
+							title={showApiKey ? t("settings:common.hideApiKey") : t("settings:common.showApiKey")}>
+							<span className={showApiKey ? "codicon codicon-eye-closed" : "codicon codicon-eye"} />
+						</Button>
+					</div>
 					<div className="text-sm text-vscode-descriptionForeground -mt-2">
 						{t("settings:providers.apiKeyStorageNotice")}
 					</div>
